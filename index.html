@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stúdio Mari Souza - Salão de Beleza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #000000 0%, #000000 50%, #000000 100%); }
+        .text-pink { color: #ffcbdb; }
+        .text-gold { color: #FFD700; }
+        .bg-pink { background-color: #ffcbdb; }
+        .bg-gold { background-color: #FFD700; }
+        .border-pink { border-color: #FFD700; }
+        .border-gold { border-color: #FFD700; }
+        .service-card { transition: all 0.3s ease; background: linear-gradient(145deg, #1a1a1a 0%, #2a1a1a 100%); border: 2px solid #ffcbdb; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);  }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(255, 203, 219, 0.3), 0 0 30px rgba(255, 215, 0, 0.2); }
+        .cart-sidebar { transform: translateX(100%); transition: transform 0.3s ease; }
+        .cart-sidebar.open { transform: translateX(0); }
+        .modal { display: none; }
+        .modal.show { display: flex; }
+        .page { display: none; }
+        .page.active { display: block; }   
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Header -->
+    <header class="gradient-bg text-black py-6 shadow-lg">
+        <div class="container text-align mx-auto px-4">           
+            <img src="img/nome.png" class="logo">                
+            </div>        
+    </header>
+   
+    <!-- Página Principal -->
+    <div id="homePage" class="page active">
+        <div class="container mx-auto px-4 py-6">
+            <h2 class="text-2xl font-bold text-center mb-2 text-white">Faça seu agendamento!</h2>
+            <p class="text-sm text-center">⚠️ O pré-agendamento está sujeito a alteração conforme disponibilidade de data e horário.</p>
+            <br>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12 px-4">
+                <!-- Cílios -->
+                <div class="service-card rounded-lg shadow-lg p-6 cursor-pointer flex flex-col justify-center" onclick="showServicesPage('cilios')">
+                    <img src="img/cilsob.jpg" class="img cilios">
+                    <div class="text-center" >                                      
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2">Cílios & Sobrancelhas</h3>
+                        <p class="text-white text-sm md:text-base mb-4">Realce seu olhar com nossos tratamentos</p>
+                        <button class="bg-pink text-black px-6 md:px-6 py-2 rounded-full hover:bg-pink-400 transition font-semibold text-sm md:text-base">
+                            Ver Serviços
+                        </button>
+                    </div>
+                </div>
+                
+           
+                <!-- Manicure e Pedicure -->
+                <div class="service-card rounded-lg shadow-lg p-6 cursor-pointer flex flex-col justify-center" onclick="showServicesPage('manicure')">
+                    <img src="img/manipedi.jpg" class="img manicure"> 
+                    <div class="text-center">                                                   
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2">Manicure & Pedicure</h3>
+                        <p class="text-white text-sm md:text-base mb-4">Cuidados completos para suas unhas</p>
+                        <button class="bg-pink text-black px-4 md:px-6 py-2 rounded-full hover:bg-pink-400 transition font-semibold text-sm md:text-base">
+                            Ver Serviços
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                       
+     <!-- Aviso Importante -->
+    <div class="bg-gray-900 border border-pink rounded-lg p-6 mb-8 mx-4 md:mx-auto max-w-xl">
+        <div class="text-center">
+            <div class="flex justify-center items-center mb-4">
+                <i class="fas fa-exclamation-triangle text-pink text-2xl mr-3"></i>
+                <h3 class="font-bold text-xl text-white">Importante:</h3>
+            </div>
+            <div class="space-y-3 text-white">
+                <p class="text-sm">Para agendamentos será cobrado 35% do valor.</p>
+                <p>Em caso de desistência o valor não será devolvido.</p>
+                <p>Agendamentos apenas com sinal.</p>                
+            </div>
+        </div>
+    </div>
+    
+    <!-- Página de Serviços -->
+    <div id="servicesPage" class="page">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center mb-8 gap-4">
+                <button onclick="goHome()" class="bg-pink text-black px-4 py-2 rounded-lg hover:bg-pink-400 transition font-semibold">
+                    ← Voltar
+                </button>
+                <h2 id="servicesPageTitle" class="text-2xl md:text-2xl font-bold text-white"></h2>
+            </div>
+            
+            <div id="servicesPageList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+        </div>
+    </div>
+
+
+
+    <!-- Carrinho Lateral -->
+    <div id="cartSidebar" class="cart-sidebar fixed right-0 top-0 h-full w-full sm:w-96 bg-gray-900 shadow-2xl z-50 p-4 sm:p-6 border-l-2 border-pink">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold text-white">Meu Agendamento</h3>
+            <button onclick="closeCart()" class="text-pink hover:text-pink-400 text-2xl">×</button>
+        </div>
+        
+        <div id="cartItems" class="mb-6 max-h-60 overflow-y-auto"></div>
+        
+        <div class="border-t border-pink pt-4">
+            <div class="flex justify-between items-center mb-4">
+                <span class="font-bold text-lg text-white">💎 Total:</span>
+                <span id="cartTotal" class="font-bold text-lg text-gold">R$ 0,00</span>
+            </div>
+            
+            <div class="space-y-3">
+                <button onclick="continueScheduling()" class="w-full bg-gray-700 text-white py-3 rounded-lg hover:bg-gray-600 transition border border-pink">
+                    Continuar Agendando
+                </button>
+                <button onclick="showScheduleForm()" class="w-full bg-pink text-black py-3 rounded-lg hover:bg-pink-400 transition font-semibold">
+                    Finalizar Pré-Agendamento
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Agendamento -->
+    <div id="scheduleModal" class="modal fixed inset-0 bg-black bg-opacity-75 items-center justify-center z-50 p-4">
+        <div class="bg-gray-900 border-2 border-pink rounded-lg max-w-md w-full shadow-2xl shadow-gold/20">
+            <div class="p-6">
+                <h3 class="text-xl font-bold text-white mb-4">Finalizar Pré-Agendamento</h3>
+                
+                <form id="scheduleForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-white mb-1">Nome e Sobrenome</label>
+                        <input type="text" id="clientName" required class="w-full bg-black border border-pink rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-white mb-1">WhatsApp</label>
+                        <input type="tel" id="clientPhone" required placeholder="(11) 99999-9999" class="w-full bg-black border border-pink rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-white mb-1">Data</label>
+                        <select id="preferredDate" required class="w-full bg-black border border-pink rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink">
+                            <option value="">Selecione uma data</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-white mb-1">Horário</label>
+                        <select id="preferredTime" required class="w-full bg-black border border-pink rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink">
+                            <option value="">Selecione um horário</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex space-x-3 pt-4">
+                        <button type="button" onclick="closeScheduleModal()" class="flex-1 bg-gray-700 text-white py-2 rounded-lg hover:bg-gray-600 transition border border-pink">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="flex-1 bg-pink text-black py-2 rounded-lg hover:bg-pink-400 transition font-semibold">
+                            Enviar para WhatsApp
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-gold">✨ Stúdio Mari Souza</h4>
+                    <p class="text-gray-300">Seu salão de beleza de confiança</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Contato</h4>
+                    <p class="text-gray-300 mb-2"><i class="fas fa-phone mr-2"></i> (21) 98514-1176</p>
+                    <p class="text-gray-300 mb-2"><i class="fas fa-envelope mr-2"></i> contat@studiomari.com</p>
+                    <p class="text-gray-300"><i class="fas fa-map-marker-alt mr-2"></i> Rua Maranguape, 99 - Cabuçu - Nova Iguaçu/RJ</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Redes Sociais</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-pink-400 text-2xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-pink-400 text-2xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-pink-400 text-2xl"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300">&copy; 2024 Stúdio Mari Souza. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+       // Dados dos serviços
+        const services = {
+            manicure: [
+                { name: 'Fibra', price: 100.00, image: 'img/fibra.jpg' },
+                { name: 'Acrigel decorada', price: 85.00, image: 'img/acrigel-decorada.jpg' },
+                { name: 'Acrigel simples', price: 70.00, image: 'img/acrigel-simples.jpg' },
+                { name: 'Molde f1', price: 75.00, image: 'img/moldef1.jpg' },
+                { name: 'Banho de gel', price: 60.00, image: 'img/banho-de-gel.jpg' },
+                { name: 'Postiça realista decorada', price: 45.00, image: 'img/postiça-realista-decorada.jpg' },
+                { name: 'Postiça realista simples', price: 30.00, image: 'img/unhas-posticas-simples.jpg' },
+                { name: 'Unhas da mão simples', price: 25.00, image: 'img/mao-simples.jpg' },
+                { name: 'Unhas da mão com esmaltação em gel e decoração', price: 45.00, image: 'img/mao-gel-dec.jpg' },
+                { name: 'Unhas da mão simples com esmaltação em gel', price: 35.00, image: 'img/unha-de-gel-simples.jpg' },
+                { name: 'Unhas do pé', price: 25.00, image: 'img/unha-pe.jpg' },
+                { name: 'Spa dos pés', price: 40.00, image: 'img/spa-pes.jpg' },
+                { name: 'Manutenção da fibra', price: 80.00, image: 'img/manu-fibra.jpg' },
+                { name: 'Manutenção da acrigel', price: 65.00, image: 'img/manu-acrigel.jpg' },
+                { name: 'Manutenção do molde f1', price: 65.00, image: 'img/manu-moldef1.jpg' },
+                { name: 'Manutenção do banho de gel', price: 50.00, image: 'img/manu-bangel.jpg' },
+                { name: 'Remoção', price: 20.00, image: 'img/remunha.jpg' },
+                { name: 'Cada unha que cair', price: 10.00, image: 'img/caiuunh.jpg' },
+                { name: 'Mudança de formato', price: 10.00, image: 'img/mudform.jpg' }
+            ],
+            cilios: [
+                { name: 'Volume brasileiro', price: 105.00, image: 'img/volbr.jpg' },
+                { name: 'Volume 5D', price: 115.00, image: 'img/vol5d.jpg'  },
+                { name: 'Limpeza de sobrancelha', price: 20.00, image: 'img/limpsob.jpg'  },                
+                { name: 'Manutenção volume brasileiro', price: 65.00, image: 'img/manuvolbr.png' },
+                { name: 'Manutenção volume 5D', price: 85.00, image: 'img/manuvol5d.jpg'  },
+                { name: 'Remoção', price: 20.00, image: 'img/remocil.jpg'  }
+            ]
+        };
+
+        let cart = [];
+
+        // Gerar datas disponíveis (terça a sábado)
+        function generateAvailableDates() {
+            const dates = [];
+            const today = new Date();
+            
+            for (let i = 1; i <= 30; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                const dayOfWeek = date.getDay();
+                
+                // 2=terça, 3=quarta, 4=quinta, 5=sexta, 6=sábado
+                if (dayOfWeek >= 2 && dayOfWeek <= 6) {
+                    const dateStr = date.toLocaleDateString('pt-BR');
+                    const dayName = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'][dayOfWeek];
+                    dates.push({ value: dateStr, text: `${dayName}, ${dateStr}` });
+                }
+            }
+            
+            return dates;
+        }
+
+        // Mostrar página de serviços
+        function showServicesPage(category) {
+            const homePage = document.getElementById('homePage');
+            const servicesPage = document.getElementById('servicesPage');
+            const title = document.getElementById('servicesPageTitle');
+            const servicesList = document.getElementById('servicesPageList');
+            
+            homePage.classList.remove('active');
+            servicesPage.classList.add('active');
+            
+            title.textContent = category === 'manicure' ? 'Manicure & Pedicure' : 'Cílios & Sobrancelhas';
+            
+            servicesList.innerHTML = services[category].map(service => `
+                <div class="bg-gray-900 border border-pink rounded-lg p-4 flex flex-col items-center text-center">
+                    <!-- Espaço para foto do serviço -->
+                    <div class="w-40 h-40 border-pink  flex items-center justify-center mb-3">
+                       <img src="${service.image}" alt="${service.name}" class="w-40 h-40 object-cover rounded-lg mb-3" />
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h4 class="font-bold text-white text-base mb-1">${service.name}</h4>
+                        <p class="text-gold font-bold text-base">💰 R$ ${service.price.toFixed(2).replace('.', ',')}</p>
+                    </div>
+                    
+                    <button onclick="addToCart('${service.name}', ${service.price})" 
+                            class="bg-pink text-black px-3 py-2 rounded-lg hover:bg-pink-400 transition font-semibold text-xs w-full">
+                        Agendar
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Voltar para home
+        function goHome() {
+            const homePage = document.getElementById('homePage');
+            const servicesPage = document.getElementById('servicesPage');
+            
+            servicesPage.classList.remove('active');
+            homePage.classList.add('active');
+        }
+
+        // Adicionar ao carrinho
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCart();
+            openCart();
+            closeModal();
+        }
+
+        // Atualizar carrinho
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-gray-400 text-center">Nenhum serviço selecionado</p>';
+            } else {
+                cartItems.innerHTML = cart.map((item, index) => `
+                    <div class="bg-black border border-pink rounded-lg p-3 flex justify-between items-start mb-2">
+                        <div class="flex-1 pr-2">
+                            <h5 class="font-medium text-white text-sm">${item.name}</h5>
+                            <p class="text-gold font-bold text-sm">💰 R$ ${item.price.toFixed(2).replace('.', ',')}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-pink hover:text-pink-400 flex-shrink-0">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            cartTotal.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        }
+
+        // Remover do carrinho
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        // Abrir/fechar carrinho
+        function openCart() {
+            document.getElementById('cartSidebar').classList.add('open');
+        }
+
+        function closeCart() {
+            document.getElementById('cartSidebar').classList.remove('open');
+        }
+
+        // Continuar agendando
+        function continueScheduling() {
+            closeCart();
+        }
+
+        // Mostrar formulário de agendamento
+        function showScheduleForm() {
+            if (cart.length === 0) {
+                alert('Adicione pelo menos um serviço ao agendamento!');
+                return;
+            }
+            
+            const dateSelect = document.getElementById('preferredDate');
+            const dates = generateAvailableDates();
+            
+            dateSelect.innerHTML = '<option value="">Selecione uma data</option>' + 
+                dates.map(date => `<option value="${date.value}">${date.text}</option>`).join('');
+            
+            document.getElementById('scheduleModal').classList.add('show');
+        }
+
+        // Fechar modal de agendamento
+        function closeScheduleModal() {
+            document.getElementById('scheduleModal').classList.remove('show');
+        }
+
+        // Enviar para WhatsApp
+        document.getElementById('scheduleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('clientName').value;
+            const phone = document.getElementById('clientPhone').value;
+            const date = document.getElementById('preferredDate').value;
+            const time = document.getElementById('preferredTime').value;
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const sinal = total * 0.35;
+            
+            const services = cart.map(item => `• ${item.name} - R$ ${item.price.toFixed(2).replace('.', ',')}`).join('\n');
+            
+            const message = `🌸 *PRÉ-AGENDAMENTO - STÚDIO MARI SOUZA* 🌸
+
+👤 *Cliente:* ${name}
+📱 *WhatsApp:* ${phone}
+
+📅 *Data preferida:* ${date}
+🕐 *Horário preferido:* ${time}
+
+💅 *Serviços solicitados:*
+${services}
+
+💰 *Valor total:* R$ ${total.toFixed(2).replace('.', ',')}
+💳 *Sinal (35%):* R$ ${sinal.toFixed(2).replace('.', ',')}
+
+⚠️ *Aguarde a confirmação de disponibilidade de data e horário para os serviços.*
+
+📝 *Lembrete:* Agendamentos apenas com sinal. Em caso de desistência, o valor não será devolvido.`;
+
+            const whatsappUrl = `https://wa.me/5521985141176?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Limpar carrinho e fechar modal
+            cart = [];
+            updateCart();
+            closeScheduleModal();
+            closeCart();
+        });
+
+        // Inicializar
+        updateCart();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96e519c6c3d14360',t:'MTc1NTA1NTQ3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
