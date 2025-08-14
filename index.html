@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stúdio Mari Souza - Salão de Beleza</title>
+    <title>Stúdio Mari Souza - Salão de Beleza</title>.
+    <link rel="icon" href="img/fav.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -37,7 +38,7 @@
     <!-- Página Principal -->
     <div id="homePage" class="page active">
         <div class="container mx-auto px-4 py-6">
-            <h2 class="text-2xl font-bold text-center mb-2 text-white">Faça seu agendamento!</h2>
+            <h2 class="text-2xl font-bold text-center mb-2 text-white">Faça seu pré-agendamento!</h2>
             <p class="text-sm text-center">⚠️ O pré-agendamento está sujeito a alteração conforme disponibilidade de data e horário.</p>
             <br>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12 px-4">
@@ -103,7 +104,7 @@
     <!-- Carrinho Lateral -->
     <div id="cartSidebar" class="cart-sidebar fixed right-0 top-0 h-full w-full sm:w-96 bg-gray-900 shadow-2xl z-50 p-4 sm:p-6 border-l-2 border-pink">
         <div class="flex justify-between items-center mb-6">
-            <h3 class="text-xl font-bold text-white">Meu Agendamento</h3>
+            <h3 class="text-xl font-bold text-white">Meu Pré-agendamento</h3>
             <button onclick="closeCart()" class="text-pink hover:text-pink-400 text-2xl">×</button>
         </div>
         
@@ -154,6 +155,7 @@
                         <label class="block text-sm font-medium text-white mb-1">Horário</label>
                         <select id="preferredTime" required class="w-full bg-black border border-pink rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-pink">
                             <option value="">Selecione um horário</option>
+                            <option value="08:00">08:00</option>
                             <option value="09:00">09:00</option>
                             <option value="10:00">10:00</option>
                             <option value="11:00">11:00</option>
@@ -162,6 +164,7 @@
                             <option value="15:00">15:00</option>
                             <option value="16:00">16:00</option>
                             <option value="17:00">17:00</option>
+                            <option value="18:00">18:00</option>
                         </select>
                     </div>
                     
@@ -189,8 +192,8 @@
                 
                 <div>
                     <h4 class="text-lg font-bold mb-4">Contato</h4>
-                    <p class="text-gray-300 mb-2"><i class="fas fa-phone mr-2"></i> (21) 98514-1176</p>
-                    <p class="text-gray-300 mb-2"><i class="fas fa-envelope mr-2"></i> contat@studiomari.com</p>
+                    <p class="text-gray-300 mb-2"><i class="fas fa-phone mr-2"></i> (21) 97079-1944 (Unha)</p>
+                    <p class="text-gray-300 mb-2"><i class="fas fa-phone mr-2"></i> (21) 96887-9909 (Cílios)</p>
                     <p class="text-gray-300"><i class="fas fa-map-marker-alt mr-2"></i> Rua Maranguape, 99 - Cabuçu - Nova Iguaçu/RJ</p>
                 </div>
                 
@@ -205,7 +208,7 @@
             </div>
             
             <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <p class="text-gray-300">&copy; 2024 Stúdio Mari Souza. Todos os direitos reservados.</p>
+                <p class="text-gray-300">&copy; 2025 Stúdio Mari Souza. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
@@ -214,18 +217,18 @@
        // Dados dos serviços
         const services = {
             manicure: [
-                { name: 'Fibra', price: 100.00, image: 'img/fibra.jpg' },
-                { name: 'Acrigel decorada', price: 85.00, image: 'img/acrigel-decorada.jpg' },
-                { name: 'Acrigel simples', price: 70.00, image: 'img/acrigel-simples.jpg' },
-                { name: 'Molde f1', price: 75.00, image: 'img/moldef1.jpg' },
-                { name: 'Banho de gel', price: 60.00, image: 'img/banho-de-gel.jpg' },
-                { name: 'Postiça realista decorada', price: 45.00, image: 'img/postiça-realista-decorada.jpg' },
-                { name: 'Postiça realista simples', price: 30.00, image: 'img/unhas-posticas-simples.jpg' },
-                { name: 'Unhas da mão simples', price: 25.00, image: 'img/mao-simples.jpg' },
-                { name: 'Unhas da mão com esmaltação em gel e decoração', price: 45.00, image: 'img/mao-gel-dec.jpg' },
+                { name: 'Fibra', price: 100.00, image: 'img/fibra.jpeg' },
+                { name: 'Acrigel decorada', price: 85.00, image: 'img/acrigel-decorada.jpeg' },
+                { name: 'Acrigel simples', price: 70.00, image: 'img/acrigel-simples.jpeg' },
+                { name: 'Molde f1', price: 75.00, image: 'img/moldef1.jpeg' },
+                { name: 'Banho de gel', price: 60.00, image: 'img/banho-de-gel.jpeg' },
+                { name: 'Postiça realista decorada', price: 45.00, image: 'img/postiça-realista-decorada.jpeg' },
+                { name: 'Postiça realista simples', price: 30.00, image: 'img/unhas-posticas-simples.jpeg' },
+                { name: 'Unhas da mão simples', price: 25.00, image: 'img/mao-simples.jpeg' },
+                { name: 'Unhas da mão com esmaltação em gel e decoração', price: 45.00, image: 'img/mao-gel-dec.jpeg' },
                 { name: 'Unhas da mão simples com esmaltação em gel', price: 35.00, image: 'img/unha-de-gel-simples.jpg' },
-                { name: 'Unhas do pé', price: 25.00, image: 'img/unha-pe.jpg' },
-                { name: 'Spa dos pés', price: 40.00, image: 'img/spa-pes.jpg' },
+                { name: 'Unhas do pé', price: 25.00, image: 'img/unha-pe.jpeg' },
+                { name: 'Spa dos pés', price: 40.00, image: 'img/spa-pes.jpeg' },
                 { name: 'Manutenção da fibra', price: 80.00, image: 'img/manu-fibra.jpg' },
                 { name: 'Manutenção da acrigel', price: 65.00, image: 'img/manu-acrigel.jpg' },
                 { name: 'Manutenção do molde f1', price: 65.00, image: 'img/manu-moldef1.jpg' },
@@ -235,8 +238,8 @@
                 { name: 'Mudança de formato', price: 10.00, image: 'img/mudform.jpg' }
             ],
             cilios: [
-                { name: 'Volume brasileiro', price: 105.00, image: 'img/volbr.jpg' },
-                { name: 'Volume 5D', price: 115.00, image: 'img/vol5d.jpg'  },
+                { name: 'Volume brasileiro', price: 105.00, image: 'img/volbr.jpeg' },
+                { name: 'Volume 5D', price: 115.00, image: 'img/vol5d.jpeg'  },
                 { name: 'Limpeza de sobrancelha', price: 20.00, image: 'img/limpsob.jpg'  },                
                 { name: 'Manutenção volume brasileiro', price: 65.00, image: 'img/manuvolbr.png' },
                 { name: 'Manutenção volume 5D', price: 85.00, image: 'img/manuvol5d.jpg'  },
@@ -396,6 +399,30 @@
             
             const services = cart.map(item => `• ${item.name} - R$ ${item.price.toFixed(2).replace('.', ',')}`).join('\n');
             
+// Definir serviços de cada categoria
+            const ciliosServices = ['Volume brasileiro', 'Volume 5D', 'Limpeza de sobrancelha', 'Remoção', 'Manutenção volume brasileiro', 'Manutenção volume 5D'];
+            const manicureServices = ['Fibra', 'Acrigel decorada', 'Acrigel simples', 'Molde f1', 'Banho de gel', 'Postiça realista decorada', 'Postiça realista simples', 'Unhas da mão simples', 'Unhas da mão com esmaltação em gel e decoração', 'Unhas da mão simples com esmaltação em gel', 'Unhas do pé', 'Spa dos pés', 'Manutenção da fibra', 'Manutenção da acrigel', 'Manutenção do molde f1', 'Manutenção do banho de gel', 'Remoção', 'Cada unha que cair', 'Mudança de formato'];
+            
+            // Verificar quais tipos de serviços estão no carrinho
+            const hasCilios = cart.some(item => ciliosServices.includes(item.name));
+            const hasManicure = cart.some(item => manicureServices.includes(item.name));
+            
+            // Definir qual número usar baseado na regra:
+            // - Se tem ambos (cílios + manicure) = número da manicure
+            // - Se tem só cílios = número dos cílios
+            // - Se tem só manicure = número da manicure
+            let whatsappNumber;
+            if (hasCilios && hasManicure) {
+                // Ambos os serviços - usar número da manicure
+                whatsappNumber = '5521968879909'; // SUBSTITUA pelo número da manicure
+            } else if (hasCilios) {
+                // Só cílios - usar número dos cílios
+                whatsappNumber = '5521970791944'; // SUBSTITUA pelo número dos cílios
+            } else {
+                // Só manicure - usar número da manicure
+                whatsappNumber = '5521968879909'; // SUBSTITUA pelo número da manicure
+            }
+
             const message = `🌸 *PRÉ-AGENDAMENTO - STÚDIO MARI SOUZA* 🌸
 
 👤 *Cliente:* ${name}
@@ -414,7 +441,7 @@ ${services}
 
 📝 *Lembrete:* Agendamentos apenas com sinal. Em caso de desistência, o valor não será devolvido.`;
 
-            const whatsappUrl = `https://wa.me/5521985141176?text=${encodeURIComponent(message)}`;
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             
             // Limpar carrinho e fechar modal
