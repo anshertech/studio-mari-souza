@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stúdio Mari Souza</title>
+    <title>Stúdio Mari Souza - Salão de Beleza</title>.
     <link rel="icon" href="img/fav.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -123,6 +123,40 @@
                 <button onclick="showScheduleForm()" class="w-full bg-pink text-black py-3 rounded-lg hover:bg-pink-400 transition font-semibold">
                     Finalizar Pré-Agendamento
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Informações Importantes -->
+    <div id="infoModal" class="modal fixed inset-0 bg-black bg-opacity-75 items-center justify-center z-50 p-4">
+        <div class="bg-gray-900 border-2 border-pink rounded-lg max-w-lg w-full shadow-2xl shadow-gold/20">
+            <div class="p-6">
+                <div class="text-center mb-6">
+                    <div class="flex justify-center items-center mb-4">
+                        <i class="fas fa-info-circle text-pink text-3xl mr-3"></i>
+                        <h3 class="text-xl font-bold text-white">Informações Importantes</h3>
+                    </div>
+                </div>
+                
+                <div class="space-y-4 text-white text-sm">
+                    <div class="bg-black border border-pink rounded-lg p-4">
+                        <p class="mb-3"><strong class="text-pink">📅 Prazo de Manutenção:</strong> Deve ser feito a cada 15 a 20 dias. Se a manutenção não for realizada dentro do prazo, será aplicada uma taxa ou a remoção com nova colocação será necessária.</p>
+                        <p class="mb-3"><strong class="text-pink">🔄 Ciclo de Crescimento:</strong> Cada pessoa tem um ciclo único de crescimento.</p>
+                        <p class="mb-3"><strong class="text-pink">⭐ Importância da Manutenção:</strong> Retornos regulares são essenciais para manter a qualidade.</p>
+                        <p class="mb-3"><strong class="text-pink">⚠️ Consequências do Atraso:</strong> Atrasos podem comprometer o resultado desejado.</p>
+                        <p class="mb-3"><strong class="text-pink">💡 Recomendação:</strong> Agende a manutenção antes que o prazo se esgote.</p>                        
+                        <p><strong class="text-pink">🚫 Política de Atendimento:</strong> Não atendo clientes que sejam provenientes de outros profissionais para manutenção.</p>
+                    </div>
+                </div>
+                
+                <div class="flex space-x-3 pt-6">
+                    <button onclick="closeInfoModal()" class="flex-1 bg-gray-700 text-white py-3 rounded-lg hover:bg-gray-600 transition border border-pink font-semibold">
+                        Cancelar
+                    </button>
+                    <button onclick="confirmAndProceed()" class="flex-1 bg-pink text-black py-3 rounded-lg hover:bg-pink-400 transition font-semibold">
+                        Li e Concordo - Continuar
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -380,6 +414,21 @@
                 alert('Adicione pelo menos um serviço ao agendamento!');
                 return;
             }
+
+             // Mostrar primeiro o modal de informações importantes
+            document.getElementById('infoModal').classList.add('show');
+        }
+
+        // Fechar modal de informações
+        function closeInfoModal() {
+            document.getElementById('infoModal').classList.remove('show');
+        }
+
+        // Confirmar e prosseguir para o formulário
+        function confirmAndProceed() {
+            // Fechar modal de informações
+            document.getElementById('infoModal').classList.remove('show');
+
             
             const dateSelect = document.getElementById('preferredDate');
             const dates = generateAvailableDates();
@@ -430,7 +479,7 @@
                 whatsappNumber = '5521970791944'; // SUBSTITUA pelo número dos cílios
             } else {
                 // Só manicure - usar número da manicure
-                whatsappNumber = '5521968879909'; // SUBSTITUA pelo número da manicure
+                whatsappNumber = '552168879909'; // SUBSTITUA pelo número da manicure
             }
 
             const message = `🌸 *PRÉ-AGENDAMENTO - STÚDIO MARI SOUZA* 🌸
@@ -466,5 +515,3 @@ ${services}
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96e519c6c3d14360',t:'MTc1NTA1NTQ3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
